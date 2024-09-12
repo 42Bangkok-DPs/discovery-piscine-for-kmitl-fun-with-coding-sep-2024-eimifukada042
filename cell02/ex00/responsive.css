@@ -1,0 +1,25 @@
+body{
+    margin:0;
+    padding: 0;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(2,1)fr;
+}
+.content{
+    height: 100vh;
+}
+table{
+    border-collapse: collapse;
+}
+td{
+    height: 100px;
+    width: 1000px;
+    border: 1px solid black;
+}
+.td1{
+    background-color: aqua;
+}
+.td2{
+    background-color: red;
+}
