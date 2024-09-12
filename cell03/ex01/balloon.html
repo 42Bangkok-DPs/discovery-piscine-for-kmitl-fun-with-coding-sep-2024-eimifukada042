@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon</title>
+    <style>
+        body{
+            margin: 0; /* ลบขอบของเว็ป */
+            height: 100vh; /* ให้บอลลูนสามารถขยายได้แบบเต็ม Browser */
+            display: flex; /*จัดเรียงให้เป็นแบบ flex layout ที่ยืดหยุ่นได้*/
+            align-items: center; /* จัดแนวแนวตั้งตรงกลาง */
+            justify-content: center; /* จัดแนวแนวนอนตรงกลาง */
+            background-color: white;
+        }
+        .balloon{
+            height: 200px;
+            width: 200px;
+            background-color: red;
+            border-radius: 50%; /*ทำให้มุมของ div เป็นมุมจะได้เป็น balloon*/
+            display: flex; 
+            align-items: center; /* balloon ขยายในแนวตั้งได้ */
+            justify-content: center; /* balloon ขยายในแนวนอนได้ */
+            transition: all 0.3s ease; /* ทำให้การเปลี่ยนขนาดและสีเรียบเนียน */
+        }
+    </style>
+</head>
+<body>
+    <div class="balloon"></div> 
+    <script>
+        const balloon = document.querySelector('.balloon'); // ประกาศตัวแปรคงที่เป็น ballon ที่รับมาจาก html
+        let size = 200; // Size balloon เริ่มต้น
+        const colors = ['red','green','blue']; //ลำดับสี balloon
+        let colorIndex = 0; //Array 0 1 2
+
+        balloon.addEventListener('click', () =>{ //function เมื่อกด
+            size += 10; //กดแล้วเพิ่มทีละ 10px
+            if(size > 420){ //เงื่อนไขถ้าเกิน 420 px 
+                size = 200; // ขนาดกลับไปที่ 200px ถ้าใหญ่กว่า 420px
+            }
+            balloon.style.width = `${size}px`; //สำหรับประมวลผลเป็น 200px
+            balloon.style.height = `${size}px`; //สำหรับประมวลผลเป็น 200px
+            // เปลี่ยนสี
+            colorIndex = (colorIndex + 1) % colors.length; // % หารเอาเศษแล้วผลลัพธ์จะออกมาเป็นสีเวลากด cl = 3 
+            balloon.style.backgroundColor = colors[colorIndex];  //เปลี่ยนสี ballon
+        });
+       
+        balloon.addEventListener('mouseleave', () => { //function เมื่อเมาท์ออก
+            if(size > 200){ //น้อยกว่า 200px
+                size -= 5; //ลดลงทีละ 5px
+            balloon.style.width = `${size}px`; //สำหรับประมวลผลเมื่อลดลง 5px
+            balloon.style.height = `${size}px`; //สำหรับประมวลผลเมื่อลดลง 5px
+                
+            colorIndex = (colorIndex - 1 + colors.length) % colors.length; // % หารเอาเศษแล้วผลลัพธ์จะออกมาเป็นสีเวลากด cl = 3 
+            balloon.style.backgroundColor = colors[colorIndex]; //เปลี่ยนสี ballon
+            }
+  
+        });
+    </script>
+</body>
+</html>
