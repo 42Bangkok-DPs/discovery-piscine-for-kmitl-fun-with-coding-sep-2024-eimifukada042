@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+    <style>
+        .calc {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input, select {
+            margin: 1rem; /* เท่ากับ 16px1*/
+        }
+    </style>
+</head>
+<body>
+    <div class="calc"> 
+        <input type="text" id="leftInput">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="text" id="rightInput">
+        <input type="submit" class="submit" value="Try me!" onclick="calculate()">
+    </div>
+    <script>
+        function calculate() { //function คิดเลข
+            const Left = parseInt(document.getElementById('leftInput').value); //รับค่าที่กรอกจากตาราง Left โดย paseInt แปลงสตริงเป็นตัวเลข
+            const Operator = document.getElementById('operator').value; //รับค่าที่กรอกจากตาราง Operation
+            const Right = parseInt(document.getElementById('rightInput').value); //รับค่าที่กรอกจากตาราง Right
+
+            // เช็คค่าที่ติดลบ
+            if (!isPositiveInteger(Left) || !isPositiveInteger(Right)) { //กรอกติดลบอย่างใดอย่างหนึ่งแจ้งเตือน Error
+                alert('Error :(');
+                return;
+            }
+
+            // เช็คส่วน 0
+            if ((Operator === '/' || Operator === '%') && Right === 0) { //ถ้ามีการหารหรือมอดกันแล้วเป็น 0 ให้แจ้ง
+                alert('It’s over 9000!');
+                console.log('It’s over 9000!');
+                return;
+            }
+
+            let result; //ผลลัพธ์ที่ได้จาก Operator
+
+            // เลือก Operator
+            switch (Operator) {
+                case '+':
+                    result = Left + Right;
+                    break;
+                case '-':
+                    result = Left - Right;
+                    break;
+                case '*':
+                    result = Left * Right;
+                    break;
+                case '/':
+                    result = Left / Right;
+                    break;
+                case '%':
+                    result = Left % Right;
+                    break;
+                default:
+                    alert('Error :('); //ถ้าไม่ตรงตามเงื่อนไขให้แจ้ง Error
+                    return;
+            }
+
+            // Display the result
+            alert('Result = ' + result);
+            console.log('Result = ', result);
+        }
+
+        // เช็คค่าลบ 
+        function isPositiveInteger(value) { 
+            return !isNaN(value) && value >= 0; //!isNaN ถ้าเป็น true (จำนวนเต็ม)จะส่งค่าไม่เป็น NaN และค่า value ต้องมากกว่าหรือเท่ากับ 0
+        } 
+
+        setInterval(() => {
+            alert('Please, use me...');
+        }, 30000); // alert เอาไว้แจ้งเตือนในหน้าต่าง 30 วินาที (30000 มิลลิวินาที เท่ากับ 30 วินาที)
+    </script>
+</body>
+</html>
