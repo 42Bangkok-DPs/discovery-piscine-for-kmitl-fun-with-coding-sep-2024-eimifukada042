@@ -40,6 +40,7 @@
 
                 if(!isPositiveInteger(Left) || !isPositiveInteger(Right)){
                     alert('Error :(');
+                    console.error('Error :(');
                     return;
                 }
                 if((Operator === '/' || Operator === '%') && Right === 0){
