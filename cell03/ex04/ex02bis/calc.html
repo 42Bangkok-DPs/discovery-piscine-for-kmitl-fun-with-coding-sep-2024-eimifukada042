@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calc {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input, select {
+            margin: 1rem; /* เท่ากับ 16px */
+        }
+    </style>
+</head>
+<body>
+    <div class="calc">
+        <input type="text" id="leftInput">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="text" id="rightInput">
+        <input type="submit" class="submit" value="Try me!">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.submit').on('click', function(){
+                const Left = parseInt($('#leftInput').val(),10);
+                const Operator = $('#operator').val();
+                const Right = parseInt($('#rightInput').val(),10);
+
+                if(!isPositiveInteger(Left) || !isPositiveInteger(Right)){
+                    alert('Error :(');
+                    return;
+                }
+                if((Operator === '/' || Operator === '%') && Right === 0){
+                    alert('It’s over 9000!');
+                    console.log('It’s over 9000!');
+                    return;
+                }
+
+                let result;
+
+                switch (Operator){
+                    case '+': 
+                        result= Left + Right;       
+                        break;
+                    case '-':
+                        result = Left - Right;
+                        break;
+                    case '*':
+                        result = Left * Right;
+                        break;
+                    case '/':
+                        result = Left / Right;
+                        break;
+                    case '%':
+                        result = Left % Right;
+                        break;
+                    default:
+                        alert('Error :(');
+                        return;
+                }
+
+                alert('Result = ' + result);
+                console.log('Result = ', result);
+
+            });
+            function isPositiveInteger(value){
+                return !isNaN(value) && value >= 0;
+
+            }
+            setInterval(() => {
+                alert('Please, use me...');
+
+            }, 30000);
+
+
+        });
+    </script>
+    
+</body>
+</html>
