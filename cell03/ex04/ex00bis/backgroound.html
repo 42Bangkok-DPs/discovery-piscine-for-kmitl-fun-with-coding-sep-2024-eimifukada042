@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backgroound</title>
+    <link rel="stylesheet" href="backgroound.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){ //ประกาศ Jquery เพื่อเข้าถึง element ของ document html
+            function randomColor(){ //สร้างฟังก์ชันสุ่มสี
+                letters = '0123456789ABCDEF'; //letters คงที่สำหรับค่าชุดค่าสี
+                color = '#'; //color เป็นตัวแปรว่างไว้
+                for(let i = 0; i < 6;i++){ //for loop วนสุ่มสีจากชุดสี โดยโทนสีหลักจะมี 6 สี จะให้วนโทนสีแทน
+                    color += letters[Math.floor(Math.random()*16)]; //สีมีการเปลี่ยนแปลงดดยค่าสีจะเพิ่มขึ้นหลังจากสุ่มเสร็จ
+                }
+                return color; //ส่งค่าสีกลับมา
+            }
+            function eventColor(){ //สร้างฟังก์ชันสำหรับให้สุ่มสีใน background
+                $('body').css('background-color',randomColor); 
+            }
+            $('button').click(function(){//ให้ background เข้าถึงได้เมื่อกดปุ่ม 
+                eventColor();
+            });
+        });
+    </script>
+</head>
+<body>
+    <button>Click me!</button> <!--สร้างปุ่ม button Click me!-->
+</body>
+</html>
