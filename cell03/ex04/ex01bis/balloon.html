@@ -6,56 +6,59 @@
     <title>Balloon</title>
     <style>
         body {
-            margin: 0; /* ลบขอบของเว็ป */
-            height: 100vh; /* ให้บอลลูนสามารถขยายได้แบบเต็ม Browser */
-            display: flex; /* จัดเรียงให้เป็นแบบ flex layout ที่ยืดหยุ่นได้ */
-            align-items: center; /* จัดแนวแนวตั้งตรงกลาง */
-            justify-content: center; /* จัดแนวแนวนอนตรงกลาง */
+            margin: 0; /*Set the element's margin to 0 on all sides (top, right, bottom, and left), which ensures there is no white space around the element. */
+            height: 100vh; /* Allow balloons to expand to cover the entire browser. */
+            display: flex; /* Arrange into a flexible flex layout */
+            align-items: center; /* Center vertical alignment */
+            justify-content: center; /* Center horizontal alignment */
             background-color: white;
         }
         .balloon {
             height: 200px;
             width: 200px;
             background-color: red;
-            border-radius: 50%; /* ทำให้มุมของ div เป็นมุมจะได้เป็น balloon */
+            border-radius: 50%; /* Make the corners of the div corners so it becomes a balloon. */
             display: flex;
-            align-items: center; /* balloon ขยายในแนวตั้งได้ */
-            justify-content: center; /* balloon ขยายในแนวนอนได้ */
-            transition: all 0.3s ease; /* ทำให้การเปลี่ยนขนาดและสีเรียบเนียน */
+            align-items: center; /* Balloon can expand vertically. */
+            justify-content: center; /* Balloon can expand horizontally. */
+            transition: all 0.3s ease; /* Makes size and color changes smoother  */
         }
     </style>
 </head>
 <body>
-    <div class="balloon"></div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="balloon"></div> <!--Create a class named balloon and use div becase Make scripting easier -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    //Import the jQuery script on the line after the div because  want to create a balloon class before we can add balloon capabilities.
     <script>
-        $(document).ready(function(){
-            const $balloon = $('.balloon')
-            let   size = 200;
-            const colors = ['red','green','blue'];
-            let colorIndex = 0;
+        $(document).ready(function(){ //Declares jQuery access to the Document ready method and normal call back functions.
+            const $balloon = $('.balloon') // // Set a variable for jQuery to access the balloon element, saving from having to set jQuery multiple times.
+            let   size = 200; //Declare the initial size variable for balloon.
+            const colors = ['red','green','blue']; //Declare a variable called colors , which stores the color values ​​as an Array 0 1 2 .
+            let colorIndex = 0; //For selecting colors based on index in Array
 
-            $balloon.on('click', function(){
-                size += 10;
-                if( size > 420){
-                    size = 200;
-                }
-                    $balloon.css({
-                        'width': `${size}px`,
+            $balloon.on('click', function(){ //Create a function when a balloon is clicked
+                size += 10; // 1 click increase 10 pixels Before entering the loop, can click to increase by 10 px
+                if( size > 420){ //Condition when the balloon size or size variable has a value greater than 420
+                    size = 200; //Use for because you want to keep looping values ​​when you click on the balloon.
+                } //When the size exceeds 420, return to 200.
+                    $balloon.css({ //Let jQuery use the ballon element by making the method css to change it back to the original value, including the color in the colorindex.
+                        'width': `${size}px`, //This sets the width(วิด) of the $balloon element to the value stored in the size variable, with px as the unit.
                         'height': `${size}px`,
-                        'background-color' : colors[colorIndex]
+                        'background-color' : colors[colorIndex] //his sets the background color of the $balloon element to the color specified in the colors array at the index colorIndex.
                     });
-                    colorIndex = (colorIndex + 1 ) % colors.length;
-                });
-            $balloon.on('mouseleave', function(){
-                if( size > 200){
-                    size -= 5;
+                    colorIndex = (colorIndex + 1 ) % colors.length; //Update colorindex Increase the colorIndex value by 1 and use the modulus 
+                }); //for surecolorIndex colorIndex will loop back to 0 when the end of the color array is reached, causing a color loop.
+            //colors.lenght returns the number of elements in the colors array.
+            $balloon.on('mouseleave', function(){  //Create a function when the mouse exits the balloon.
+                if( size > 200){ //Condition if the size value is greater than 200 px, or it happens all the time because the default value is 200 px.
+                    size -= 5; //When remove mount, reduce it by 5 px at a time.
                 $balloon.css({
-                    'width': `${size}px`,
+                    'width': `${size}px`, 
                     'height': `${size}px`,
                     'background-color' : colors[(colorIndex - 1 + colors.length) % colors.length]
+                    //Subtract 1 from colorIndex , increase the length of the colors array to handle negative indices, and use the modulus % to loop back.
                 });
-                colorIndex = (colorIndex - 1 + colors.length) % colors.length;
+                colorIndex = (colorIndex - 1 + colors.length) % colors.length; //This adjustment handles cases where colorIndex may become negative and ensures that colors loop correctly.
                 }
             });
         });
