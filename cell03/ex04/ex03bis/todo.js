@@ -30,7 +30,7 @@ $(document).ready(function() {
         });
 
         // Add the task at the top of the list
-        $('#ft_list').prepend($taskElement);
+        $('#ft_list').append($taskElement);
 
         // Save tasks to cookies if requested
         if (save) saveTasks();
